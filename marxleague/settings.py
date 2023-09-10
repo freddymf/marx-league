@@ -38,8 +38,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'futbol.apps.FutbolConfig',
-    'common.apps.CommonConfig'
+    # 'common.apps.CommonConfig',
+    # 'standings.apps.StandingsConfig',
+    # 'schedule.apps.ScheduleConfig',
+    # 'stats.apps.StatsConfig',
+    'futbol.apps.FutbolConfig'
 ]
 
 MIDDLEWARE = [

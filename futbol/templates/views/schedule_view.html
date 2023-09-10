@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  My amazing blog
+{% endblock %}
+
+{% block content %}
+
+  <table>
+    <thead class="table">
+      <tr>
+        <th>Fecha</th>
+        <th>Equipo</th>
+        <th>Hora</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for schedule in schedules %}
+        <tr>
+          <td>{{ schedule.date }}</td>
+          <td>{{ schedule.team }}</td>
+          <td>{{ schedule.time }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+ 
+
+{% endblock %}
