@@ -3,8 +3,8 @@ from django.views.generic import TemplateView
 from futbol.models.schedule import Schedule
 
 
-class SchedulePageView(TemplateView):
-    template_name = "pages/schedule_page.html"
+class ScheduleMenuOptionPageView(TemplateView):
+    template_name = "pages/schedule_menu_option_page.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

@@ -1,17 +1,17 @@
 from django.urls import path
 
-from futbol.views.pages.schedule_page_view import SchedulePageView
-from futbol.views.pages.standings_page_view import  StandingsPageView
-from futbol.views.pages.stats_page_view import StatsPageView
-from .views.pages.landing_page_view import LandingPageView
+from futbol.views.pages.schedule_menu_option_page import ScheduleMenuOptionPageView
+from futbol.views.pages.standings_menu_option_page import  StandingsMenuOptionPageView
+from futbol.views.pages.stats_menu_option_page import StatsMenuOptionPageView
+from .views.pages.home_page import HomePageView
 
 urlpatterns = [
-    path("", LandingPageView.as_view(), name="landing_page"),
+    path("", HomePageView.as_view(), name="landing_page"),
 
     # path("standings/",  views.ScheduleView.as_view(), name="schedule_index")),
-    path("schedule/", SchedulePageView.as_view(), name="schedule_page"),
-    path("standings/", StandingsPageView.as_view(), name="standings_page"),
-    path("stats/", StatsPageView.as_view(), name="stats_page"),
+    path("schedule/", ScheduleMenuOptionPageView.as_view(), name="schedule_page"),
+    path("standings/", StandingsMenuOptionPageView.as_view(), name="standings_page"),
+    path("stats/", StatsMenuOptionPageView.as_view(), name="stats_page"),
     # path("stats/", include("stats.urls")),
  ]
 

@@ -1,29 +1,18 @@
-{% extends 'base.html' %}
-
-{% block title %}
-  My amazing blog
-{% endblock %}
-
-{% block content %}
-
-  <table>
-    <thead class="table">
+  <table class="table">
+    <thead>
       <tr>
-        <th>Fecha</th>
-        <th>Equipo</th>
-        <th>Hora</th>
+        <th class="text-center">Vs</th>
+        <th class="text-center">Hc</th>
+        <th class="text-center">Fecha</th>
       </tr>
     </thead>
     <tbody>
       {% for schedule in schedules %}
         <tr>
-          <td>{{ schedule.date }}</td>
-          <td>{{ schedule.team }}</td>
-          <td>{{ schedule.time }}</td>
+          <td class="text-center">{{ schedule.vs }} ({{ schedule.vs.abbrev }})</td>
+          <td class="text-center">{{ schedule.hc }} ({{ schedule.hc.abbrev }})</td>
+          <td class="text-center">{{ schedule.date }}</td>
         </tr>
       {% endfor %}
     </tbody>
   </table>
- 
-
-{% endblock %}

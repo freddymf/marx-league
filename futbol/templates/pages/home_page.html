@@ -46,7 +46,8 @@
       <div class="row">
         <div class="col-md">
           <h3>Juegos para hoy</h3>
-          <table class="table">
+          {{ schedules }}
+          {% comment %} <table class="table">
             <thead>
               <tr>
                 <th>Vs</th>
@@ -63,11 +64,10 @@
                 </tr>
               {% endfor %}
             </tbody>
-          </table>
-
+          </table> {% endcomment %}
         </div>
+      <div class="col-md">
       </div>
-      <div class="col-md"></div>
     </div>
 <hr>
     <footer class="bg-dark text-light">
