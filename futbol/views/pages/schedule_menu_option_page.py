@@ -1,6 +1,8 @@
 from django.views.generic import TemplateView
 
 from futbol.models.schedule import Schedule
+from futbol.views.views.schedule_view import ScheduleView
+from django.template.loader import render_to_string
 
 
 class ScheduleMenuOptionPageView(TemplateView):
@@ -8,18 +10,12 @@ class ScheduleMenuOptionPageView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        schedules = Schedule.objects.all()
 
-        date_filter = self.request.GET.get('date')
-        # team_filter = self.request.GET.get('team')
+        schedules_view = ScheduleView(**kwargs)
+        schedules_context = schedules_view.get_context_data(request=self.request, nextgames=5, show_details=True)
+        schedules = render_to_string(schedules_view.template_name, schedules_context)
 
-        if date_filter:
-            schedules = schedules.filter(date=date_filter)
-        # if team_filter:
-        #     schedules = schedules.filter(team=team_filter)
-
-        schedules = schedules.order_by('date')
+       
         context['schedules'] = schedules
-        context['context'] = context
-
+       
         return context

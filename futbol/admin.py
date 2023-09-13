@@ -1,5 +1,7 @@
 from django.contrib import admin
 
+from .models.goal import Goal
+
 from .models.league import League
 from .models.player import Player
 from .models.team import Team
@@ -41,18 +43,37 @@ class LeagueAdmin(admin.ModelAdmin):
 admin.site.register(League, LeagueAdmin)
 
 
-class Scheduledmin(admin.ModelAdmin):
+############################################################
+# League and Teams
+############################################################
+
+class GoalInline(admin.TabularInline):
+    model = Goal
+    extra = 0
+
+class ScheduleAdmin(admin.ModelAdmin):
     list_display = [
         "league",
         "date",
         "stages",
         "hc",
-        "hc_gol",
+        "hc_goals",
         "status",
-        "vs_gol",
+        "vs_goals",
         "vs",
-        "points",
+        "hc_points",
+        "vs_points",
+        "mvp"
     ]
+    inlines = [GoalInline]
 
 
-admin.site.register(Schedule, Scheduledmin)
+admin.site.register(Schedule, ScheduleAdmin)
+
+############################################################
+# Goals
+############################################################
+
+admin.site.register(Goal)
+
+# admin.site.register(Player)

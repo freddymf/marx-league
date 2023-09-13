@@ -1,18 +1,75 @@
-  <table class="table">
-    <thead>
+{% load static %}
+
+{{ from }}
+{{ to }}
+
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th class="text-center"></th>
+      <th class="text-center"></th>
+      <th class="text-center">Hc</th>
+      <th class="text-center"></th>
+      <th class="text-center">Estado</th>
+      <th class="text-center"></th>
+      <th class="text-center">Vs</th>
+      <th class="text-center"></th>
+
+      {% if show_details %}
+        <th class="text-center">MVP</th>
+      {% endif %}
+    </tr>
+  </thead>
+  <tbody>
+    {% for schedule in schedules %}
       <tr>
-        <th class="text-center">Vs</th>
-        <th class="text-center">Hc</th>
-        <th class="text-center">Fecha</th>
+        <td class="text-center align-middle">{{ schedule.date|date:'d/m' }}</td>
+        <td class="text-center align-middle">
+          <img style="height: 32; width: 32px" src="{% static 'images/logos/' %}{{ schedule.hc.imagen|default:'na' }}.png" class="rounded" alt="Logo" />
+        </td>
+        <td class="text-center align-middle">
+          <a href="{% url 'team_details_page'  schedule.hc.id  %}">{{ schedule.hc }}</a>
+        </td>
+        <td class="text-center align-middle">
+          {% if schedule.status == 'completed' or schedule.status == 'playing' %}
+            <span class="fw-bold fs-2">{{ schedule.hc_goals }}</span>
+          {% endif %}
+        </td>
+        <td class="text-center align-middle">
+          {% if schedule.status == 'completed' %}
+            Final
+          {% elif schedule.status == 'scheduled' %}
+
+          {% elif schedule.status == 'playing' %}
+            En Juego
+          {% elif schedule.status == 'pending' %}
+            Pendiente
+          {% elif schedule.status == 'raining' %}
+            Lloviendo
+          {% endif %}
+        </td>
+        <td class="text-center align-middle">
+          {% if schedule.status == 'completed' or schedule.status == 'playing' %}
+            <span class="fw-bold fs-2">{{ schedule.vs_goals }}</span>
+            {% if show_details %}
+              {% for goal in schedule.goal %}
+                {% if goal.team == schedule.hc %}
+                  <p>{{ goal.player.name }}</p>
+                {% endif %}
+              {% endfor %}
+            {% endif %}
+          {% endif %}
+        </td>
+        <td class="text-center align-middle">
+          <a href="{% url 'team_details_page'  schedule.vs.id  %}">{{ schedule.vs }}</a>
+        </td>
+        <td class="text-center align-middle">
+          <img style="height: 32; width: 32px" src="{% static 'images/logos/' %}{{ schedule.vs.imagen }}.png" class="rounded" alt="Logo" />
+        </td>
+        {% if show_details %}
+          <td class="text-center">{{ schedule.mvp.name }}</td>
+        {% endif %}
       </tr>
-    </thead>
-    <tbody>
-      {% for schedule in schedules %}
-        <tr>
-          <td class="text-center">{{ schedule.vs }} ({{ schedule.vs.abbrev }})</td>
-          <td class="text-center">{{ schedule.hc }} ({{ schedule.hc.abbrev }})</td>
-          <td class="text-center">{{ schedule.date }}</td>
-        </tr>
-      {% endfor %}
-    </tbody>
-  </table>
+    {% endfor %}
+  </tbody>
+</table>

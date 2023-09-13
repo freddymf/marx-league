@@ -26,7 +26,9 @@ SECRET_KEY = 'django-insecure-3a4ad*7_6gfm+9_u^t#tfb(m)eemmy0@s8fox1mq&dz6&1+9e5
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    # '192.168.1.102', '192.168.0.1', 'localhost', '127.0.0.1'
+]
 
 
 # Application definition
@@ -38,11 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # 'common.apps.CommonConfig',
-    # 'standings.apps.StandingsConfig',
-    # 'schedule.apps.ScheduleConfig',
-    # 'stats.apps.StatsConfig',
-    'futbol.apps.FutbolConfig'
+    'futbol.apps.FutbolConfig',
+    'futbol.apps'
 ]
 
 MIDDLEWARE = [

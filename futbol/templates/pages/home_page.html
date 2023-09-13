@@ -1,5 +1,7 @@
 {% extends 'pages/base.html' %}
 
+{% load static %}
+
 {% block title %}
   My amazing blog
 {% endblock %}
@@ -12,65 +14,36 @@
         <p class="text-muted">MarxLeague es una liga de fútbol escolar que une a equipos de diferentes niveles. Nuestro objetivo es promover el ejercicio y fomentar la camaradería entre los estudiantes. A través de partidos amistosos, fomentamos el desarrollo de habilidades y la unidad. Únete a nosotros para una experiencia de fútbol enriquecedora y divertida que reúne a estudiantes de diferentes niveles educativos.</p>
       </div>
     </div>
+    <hr>
     <div class="row">
       <div class="col-md">
         <h3>Equipos</h3>
-        <table class="table">
-          <thead>
-            <tr>
-              <th>Nombre</th>
-              <th>Grado</th>
-              <th>Quienes somos?</th>
-            </tr>
-          </thead>
-          <tbody>
-            {% for team in teams %}
-              <tr>
-                <td>{{ team.name }} ({{ team.abbrev }})</td>
-                <td>{{ team.grade }}</td>
-                <td>{{ team.description }}</td>
-              </tr>
-            {% endfor %}
-          </tbody>
-        </table>
-      </div>
-      <div class="col-md">
-        <h3>Reglamento</h3>
-          <ul>
-          <li>Las reglas del fútbol sala prohíben el contacto físico brusco y promueven el juego limpio. Los jugadores no pueden utilizar las manos, excepto el portero dentro de su área.</li>
-          <li>El tiempo de juego se divide en dos mitades de 20 minutos cada una, con un descanso de 10 minutos. Se sancionan las faltas con tiros libres o penales.</li>
-          <li>El objetivo es marcar más goles que el equipo contrario. En caso de empate, se pueden jugar tiempos extras o recurrir a una tanda de penales para decidir al ganador.</li>
-          <li>El fútbol sala fomenta el trabajo en equipo, la habilidad técnica y la estrategia en un formato emocionante y competitivo.</li>
-        </ul>
-      </div>
-      <div class="row">
-        <div class="col-md">
-          <h3>Juegos para hoy</h3>
-          {{ schedules }}
-          {% comment %} <table class="table">
-            <thead>
-              <tr>
-                <th>Vs</th>
-                <th>Hc</th>
-                <th>Fecha</th>
-              </tr>
-            </thead>
-            <tbody>
-              {% for schedule in schedules %}
-                <tr>
-                  <td>{{ schedule.vs }} ({{ schedule.vs.abbrev }})</td>
-                  <td>{{ schedule.hc }} ({{ schedule.hc.abbrev }})</td>
-                  <td>{{ schedule.date }}</td>
-                </tr>
+            <div class="row row-cols-2">
+              {% for team in teams %}
+                <div class="col-md text-center mt-2">
+                  <a href="{% url 'team_details_page' team.id %}">
+                  <div class="d-flex flex-column align-items-center">
+                    <img style="height: 48; width: 48px" src="{% static 'images/logos/' %}{{ team.imagen|default:"na" }}.png" class="rounded" alt="Logo">
+                    {{ team.name }}
+                  </div>
+                </a>
+                </div>
               {% endfor %}
-            </tbody>
-          </table> {% endcomment %}
+            </div>
+          </div>
+        </div>
+      </div>
+      <hr>
+      <div class="row mt-2">
+        <div class="col-md">
+          <h3>Próximos partidos</h3>
+          {{ schedules }}
         </div>
       <div class="col-md">
       </div>
     </div>
 <hr>
-    <footer class="bg-dark text-light">
+    <footer class="bg-light text-black">
       <div class="container py-4">
         <div class="row">
           <div class="col-md-4">

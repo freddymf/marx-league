@@ -1,0 +1,48 @@
+{% extends './base.html' %}
+
+{% load static %}
+
+{% block title %}
+  My amazing blog
+{% endblock %}
+
+{% block content %}
+  <div class="container">
+    <div class="row">
+      <div class="col-auto">
+        <img style="height: 48; width: 48px" src="{% static 'images/logos/' %}{{ team.imagen|default:"na" }}.png" class="rounded" alt="Logo">
+      </div>
+      <div class="col">
+        <h3>{{ team.name }}</h3>
+      </div>
+    </div>
+    <div class="row mt-2">
+      <div class="col">
+        <p>{{ team.description }}</p>
+      </div>
+    </div> 
+    <hr />
+    <div class="row">
+      <div class="col">
+        <h5 class="text-center">Jugadores</h5>
+        <div class="row row-cols-3">
+          {% for player in players %}
+            <div class="col-md text-center mt-2">
+              <div class="d-flex flex-column align-items-center">
+                <img style="height: 48; width: 48px" src="{% static 'images/players/' %}{{ player.imagen|default:'na' }}.png" class="rounded" alt="Logo" /> <br />
+                {{ player.name }}
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+    <hr />
+    <div class="row">
+      <div class="col">
+        <h5 class="text-center">Resultados</h5>
+        <div class="col">{{ schedules }}</div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
