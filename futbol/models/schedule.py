@@ -43,6 +43,9 @@ class Schedule(models.Model):
     vs_goals = models.IntegerField(null=True, blank=True)
     hc_goals = models.IntegerField(null=True, blank=True)
 
+    vs_definition_penalties = models.IntegerField(null=True, blank=True)
+    hc_definition_penalties = models.IntegerField(null=True, blank=True)
+
     vs_points = models.IntegerField(null=True, blank=True)
     hc_points = models.IntegerField(null=True, blank=True)
 
@@ -53,3 +56,7 @@ class Schedule(models.Model):
     )
 
     stages = models.CharField(max_length=20, choices=STAGES_CHOICES, default="regular")
+
+
+    def __str__(self):
+        return str(self.id) + ': ' + self.hc.name + ' - ' + self.vs.name

@@ -18,13 +18,16 @@ from .models.schedule import Schedule
 # Teams and Players
 ############################################################
 
+
 class PlayerInline(admin.TabularInline):
     model = Player
     extra = 0
 
+
 class TeamAdmin(admin.ModelAdmin):
     list_display = ["name", "grade"]
     inlines = [PlayerInline]
+
 
 admin.site.register(Team, TeamAdmin)
 
@@ -32,13 +35,16 @@ admin.site.register(Team, TeamAdmin)
 # League and Teams
 ############################################################
 
+
 class TeamInline(admin.TabularInline):
     model = Team.league.through
     extra = 0
 
+
 class LeagueAdmin(admin.ModelAdmin):
     # list_display = ["name"]
     inlines = [TeamInline]
+
 
 admin.site.register(League, LeagueAdmin)
 
@@ -47,9 +53,11 @@ admin.site.register(League, LeagueAdmin)
 # League and Teams
 ############################################################
 
+
 class GoalInline(admin.TabularInline):
     model = Goal
     extra = 0
+
 
 class ScheduleAdmin(admin.ModelAdmin):
     list_display = [
@@ -63,7 +71,9 @@ class ScheduleAdmin(admin.ModelAdmin):
         "vs",
         "hc_points",
         "vs_points",
-        "mvp"
+        "hc_definition_penalties",
+        "vs_definition_penalties",
+        "mvp",
     ]
     inlines = [GoalInline]
 

@@ -3,7 +3,7 @@
 {{ from }}
 {{ to }}
 
-<table class="table table-bordered">
+<table class="table table-bordered table-condensed">
   <thead>
     <tr>
       <th class="text-center"></th>
@@ -16,7 +16,7 @@
       <th class="text-center"></th>
 
       {% if show_details %}
-        <th class="text-center">MVP</th>
+        <th class="text-center">MVP y Goles</th>
       {% endif %}
     </tr>
   </thead>
@@ -28,9 +28,12 @@
           <img style="height: 32; width: 32px" src="{% static 'images/logos/' %}{{ schedule.hc.imagen|default:'na' }}.png" class="rounded" alt="Logo" />
         </td>
         <td class="text-center align-middle">
-          <a href="{% url 'team_details_page'  schedule.hc.id  %}">{{ schedule.hc }}</a>
+          <a href="{% url 'team_details_page'  schedule.hc.id %}">{{ schedule.hc }}</a>
         </td>
         <td class="text-center align-middle">
+          {% if schedule.hc_definition_penalties is not None or schedule.hc_definition_penalties >= 0 %}
+          <span class="fw-bold text-danger small">({{ schedule.hc_definition_penalties }})</span>
+          {% endif %}
           {% if schedule.status == 'completed' or schedule.status == 'playing' %}
             <span class="fw-bold fs-2">{{ schedule.hc_goals }}</span>
           {% endif %}
@@ -51,23 +54,29 @@
         <td class="text-center align-middle">
           {% if schedule.status == 'completed' or schedule.status == 'playing' %}
             <span class="fw-bold fs-2">{{ schedule.vs_goals }}</span>
-            {% if show_details %}
-              {% for goal in schedule.goal %}
-                {% if goal.team == schedule.hc %}
-                  <p>{{ goal.player.name }}</p>
-                {% endif %}
-              {% endfor %}
-            {% endif %}
           {% endif %}
+          {% if schedule.vs_definition_penalties >= 0 %}
+           <span class="fw-bold text-danger small">({{ schedule.vs_definition_penalties }})</span>
+        {% endif %}
         </td>
         <td class="text-center align-middle">
           <a href="{% url 'team_details_page'  schedule.vs.id  %}">{{ schedule.vs }}</a>
         </td>
         <td class="text-center align-middle">
-          <img style="height: 32; width: 32px" src="{% static 'images/logos/' %}{{ schedule.vs.imagen }}.png" class="rounded" alt="Logo" />
+          <img style="height: 32; width: 32px" src="{% static 'images/logos/' %}{{ schedule.vs.imagen|default:'na' }}.png" class="rounded" alt="Logo" />
         </td>
         {% if show_details %}
-          <td class="text-center">{{ schedule.mvp.name }}</td>
+          <td class="text-left">
+            {% if schedule.mvp%}
+            <b>MVP:</b> {{ schedule.mvp.name }} <br />
+            {% endif%}
+            {% if schedule.goal_set.all%}
+            Goles: 
+            {% for goal in schedule.goal_set.all %}
+               {{ goal.player.name }} <br>
+            {% endfor %}
+            {% endif%}
+          </td>
         {% endif %}
       </tr>
     {% endfor %}

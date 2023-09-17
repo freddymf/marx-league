@@ -14,35 +14,33 @@
         <p class="text-muted">MarxLeague es una liga de fútbol escolar que une a equipos de diferentes niveles. Nuestro objetivo es promover el ejercicio y fomentar la camaradería entre los estudiantes. A través de partidos amistosos, fomentamos el desarrollo de habilidades y la unidad. Únete a nosotros para una experiencia de fútbol enriquecedora y divertida que reúne a estudiantes de diferentes niveles educativos.</p>
       </div>
     </div>
-    <hr>
+    <hr />
     <div class="row">
       <div class="col-md">
         <h3>Equipos</h3>
-            <div class="row row-cols-2">
-              {% for team in teams %}
-                <div class="col-md text-center mt-2">
-                  <a href="{% url 'team_details_page' team.id %}">
-                  <div class="d-flex flex-column align-items-center">
-                    <img style="height: 48; width: 48px" src="{% static 'images/logos/' %}{{ team.imagen|default:"na" }}.png" class="rounded" alt="Logo">
-                    {{ team.name }}
-                  </div>
-                </a>
+        <div class="row row-cols">
+          {% for team in teams %}
+            <div class="col text-center mt-2">
+              <a href="{% url 'team_details_page' team.id  %}">
+                <div class="d-flex flex-column align-items-center">
+                  <img style="height: 48px; width: 48px" src="{% static 'images/logos/' %}{{ team.imagen|default:'na' }}.png" class="rounded" alt="Logo" />
+                  {{ team.name }}
                 </div>
-              {% endfor %}
+              </a>
             </div>
-          </div>
+          {% endfor %}
         </div>
-      </div>
-      <hr>
-      <div class="row mt-2">
-        <div class="col-md">
-          <h3>Próximos partidos</h3>
-          {{ schedules }}
-        </div>
-      <div class="col-md">
       </div>
     </div>
-<hr>
+    <hr />
+    <div class="row mt-2">
+      <div class="col-md">
+        <h3>Próximos partidos</h3>
+        {{ schedules }}
+      </div>
+      <div class="col-md"></div>
+    </div>
+    <hr />
     <footer class="bg-light text-black">
       <div class="container py-4">
         <div class="row">

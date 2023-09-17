@@ -3,7 +3,6 @@ from django.db import models
 
 from futbol.models.player import Player
 from futbol.models.schedule import Schedule
-from .league import League
 
 
 # Goal

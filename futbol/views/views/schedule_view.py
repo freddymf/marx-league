@@ -30,8 +30,8 @@ class ScheduleView(TemplateView):
 
         schedules = schedules.order_by('date')
 
-        if 'nextgame' in kwargs:  # limit
-            schedules = schedules[:kwargs['nextgame']]
+        if 'limit' in kwargs:  # limit
+            schedules = schedules[:kwargs['limit']]
 
 
         if 'details' in kwargs:

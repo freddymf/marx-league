@@ -14,7 +14,7 @@ class HomePageView(TemplateView):
         context['teams'] = teams
 
         schedules_view = ScheduleView(**kwargs)
-        schedules_context = schedules_view.get_context_data(request=self.request, _from='today', nextgames=5)
+        schedules_context = schedules_view.get_context_data(request=self.request, _from='today', limits=5)
         html = render_to_string(schedules_view.template_name, schedules_context)
         # html_code = render(self.request, 'schedule_view.html')
 
