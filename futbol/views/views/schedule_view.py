@@ -28,7 +28,7 @@ class ScheduleView(TemplateView):
             context['team'] = team
             schedules = schedules.filter(Q(vs=team) | Q(hc=team))
 
-        schedules = schedules.order_by('date')
+        schedules = schedules.order_by('-date')
 
         if 'limit' in kwargs:  # limit
             schedules = schedules[:kwargs['limit']]

@@ -6,6 +6,7 @@
 <table class="table table-bordered table-condensed">
   <thead>
     <tr>
+      <th class="text-center">Etapa</th>
       <th class="text-center"></th>
       <th class="text-center"></th>
       <th class="text-center">Hc</th>
@@ -23,6 +24,7 @@
   <tbody>
     {% for schedule in schedules %}
       <tr>
+        <td class="text-center align-middle">{{ schedule.stages }}</td>
         <td class="text-center align-middle">{{ schedule.date|date:'d/m' }}</td>
         <td class="text-center align-middle">
           <img style="height: 32; width: 32px" src="{% static 'images/logos/' %}{{ schedule.hc.imagen|default:'na' }}.png" class="rounded" alt="Logo" />

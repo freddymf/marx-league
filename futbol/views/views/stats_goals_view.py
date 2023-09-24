@@ -15,7 +15,7 @@ class StatsGoalsView(TemplateView):
         goals = Goal.objects.values('player', 'player__name', 'player__team__name', 'player__imagen', 'player__team__imagen').annotate(
             goals=Count('player'),
             penalties=Sum(Case(When(penalty=True, then=1), default=0, output_field=IntegerField()))
-        )
+        ).order_by('-goals')
         
         # if 'limit' in kwargs:  # limit
         #     goals = goals[:kwargs['limit']]
