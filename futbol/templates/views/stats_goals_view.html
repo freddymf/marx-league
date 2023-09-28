@@ -17,11 +17,11 @@
     {% for goal in goals %}
       <tr>
         <td class="text-center">
-          <img style="height: 48; width: 48px" src="{% static 'images/players/' %}{{ goal.player__imagen|default:'na' }}.png" class="rounded" alt="Logo" /> <br />
+          <img style="height: 48; width: 48px" src="{% static 'futbol/images/players/' %}{{ goal.player__imagen|default:'na' }}.png" class="rounded" alt="Logo" /> <br />
         </td>
         <td class="text-center align-middle">{{ goal.player__name }}</td>
         <td class="text-center align-middle">
-          <img style="height: 24; width: 24px" src="{% static 'images/logos/' %}{{ goal.player__team__imagen|default:'na' }}.png" class="rounded" alt="Logo" />
+          <img style="height: 24; width: 24px" src="{% static 'futbol/images/logos/' %}{{ goal.player__team__imagen|default:'na' }}.png" class="rounded" alt="Logo" />
           {{ goal.player__team__name }}
         </td>
         <td class="text-center align-middle">{{ goal.goals }}</td>

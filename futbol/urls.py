@@ -17,5 +17,6 @@ urlpatterns = [
 
     path("team-details/<int:id>", TeamDetailsPageView.as_view(), name="team_details_page"),
     path("regulation/", RegulationPageView.as_view(), name="regulation_page")
+    
  ]
 

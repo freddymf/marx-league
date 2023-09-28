@@ -10,7 +10,7 @@
   <div class="container">
     <div class="row">
       <div class="col-auto">
-        <img style="height: 48; width: 48px" src="{% static 'images/logos/' %}{{ team.imagen|default:"na" }}.png" class="rounded" alt="Logo">
+        <img style="height: 48; width: 48px" src="{% static 'futbol/images/logos/' %}{{ team.imagen|default:"na" }}.png" class="rounded" alt="Logo">
       </div>
       <div class="col">
         <h3>{{ team.name }}</h3>
@@ -29,7 +29,7 @@
           {% for player in players %}
             <div class="col-md text-center mt-2">
               <div class="d-flex flex-column align-items-center">
-                <img style="height: 48; width: 48px" src="{% static 'images/players/' %}{{ player.imagen|default:'na' }}.png" class="rounded" alt="Logo" /> <br />
+                <img style="height: 48; width: 48px" src="{% static '/futbol/images/players/' %}{{ player.imagen|default:'na' }}.png" class="rounded" alt="Logo" /> <br />
                 {{ player.name }}
               </div>
             </div>
