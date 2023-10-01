@@ -59,4 +59,4 @@ class Schedule(models.Model):
 
 
     def __str__(self):
-        return str(self.id) + ': ' + self.hc.name + ' - ' + self.vs.name
+        return str(self.league.name) + ': ' + self.hc.name + ' - ' + self.vs.name + ' - ' + self.date.strftime("%d %B")

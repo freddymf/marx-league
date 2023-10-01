@@ -1,5 +1,7 @@
 from django.contrib import admin
 
+from futbol.models.player_league_team import PlayerLeagueTeam
+
 from .models.goal import Goal
 
 from .models.league import League
@@ -19,35 +21,46 @@ from .models.schedule import Schedule
 ############################################################
 
 
-class PlayerInline(admin.TabularInline):
-    model = Player
-    extra = 0
+# class PlayerInline(admin.TabularInline):
+#     model = Player
+#     extra = 0
 
 
-class TeamAdmin(admin.ModelAdmin):
-    list_display = ["name", "grade"]
-    inlines = [PlayerInline]
+# class TeamAdmin(admin.ModelAdmin):
+#     list_display = ["name", "grade"]
+#     inlines = [PlayerInline]
+
+class PlayerLeagueTeamInline(admin.TabularInline):
+    model = PlayerLeagueTeam
+    extra = 1
+
+class PlayerAdmin(admin.ModelAdmin):
+    inlines = [PlayerLeagueTeamInline]
+
+admin.site.register(Player, PlayerAdmin)
 
 
-admin.site.register(Team, TeamAdmin)
 
 ############################################################
 # League and Teams
 ############################################################
 
-
-class TeamInline(admin.TabularInline):
-    model = Team.league.through
+class ReadOnlyTeamInline(admin.TabularInline):
+    model = League.teams.through
     extra = 0
+    can_delete = False
+    verbose_name_plural = 'Teams'
 
+    def get_formset(self, request, obj=None, **kwargs):
+        formset = super().get_formset(request, obj, **kwargs)
+        formset.form.base_fields['team'].disabled = True
+        return formset
 
 class LeagueAdmin(admin.ModelAdmin):
-    # list_display = ["name"]
-    inlines = [TeamInline]
-
+    inlines = [ReadOnlyTeamInline]
 
 admin.site.register(League, LeagueAdmin)
-
+admin.site.register(Team)
 
 ############################################################
 # League and Teams

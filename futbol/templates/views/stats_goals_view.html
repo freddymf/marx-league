@@ -21,8 +21,8 @@
         </td>
         <td class="text-center align-middle">{{ goal.player__name }}</td>
         <td class="text-center align-middle">
-          <img style="height: 24; width: 24px" src="{% static 'futbol/images/logos/' %}{{ goal.player__team__imagen|default:'na' }}.png" class="rounded" alt="Logo" />
-          {{ goal.player__team__name }}
+          <img style="height: 24; width: 24px" src="{% static 'futbol/images/logos/' %}{{ goal.player__playerleagueteam__team__imagen|default:'na' }}.png" class="rounded" alt="Logo" />
+          {{ goal.player__team__name }} 
         </td>
         <td class="text-center align-middle">{{ goal.goals }}</td>
         <td class="text-center align-middle">{{ goal.penalties }}</td>

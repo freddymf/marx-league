@@ -1,12 +1,14 @@
 from django.db import models
-from .league import League
+
+from futbol.models.league import League
 
 
 # Teams
 class Team(models.Model):
-    name = models.CharField(max_length=100, unique=True, default="Nombre")
-    description = models.CharField(max_length=300, null=True, blank=True)
-    league = models.ManyToManyField(League)
+    name = models.CharField(max_length=100, unique=True, null=True, blank=True)
+    slug = models.SlugField(max_length=100, unique=True, blank=True, null=True)
+    # name1 = models.CharField(max_length=100, unique=False, null=True, blank=True)
+
     grade = models.CharField(max_length=50, null=True, blank=True)
     abbrev = models.CharField(max_length=3, null=True, blank=True)
     imagen = models.CharField(max_length=3, null=True, blank=True)

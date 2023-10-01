@@ -28,6 +28,9 @@ class ScheduleView(TemplateView):
             context['team'] = team
             schedules = schedules.filter(Q(vs=team) | Q(hc=team))
 
+        if 'league_slug' in kwargs:
+            schedules = schedules.filter(league__slug=kwargs.get('league_slug'))
+
         schedules = schedules.order_by('-date')
 
         if 'limit' in kwargs:  # limit

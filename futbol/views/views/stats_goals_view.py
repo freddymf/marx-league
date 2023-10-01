@@ -10,15 +10,21 @@ class StatsGoalsView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
-
-
-        goals = Goal.objects.values('player', 'player__name', 'player__team__name', 'player__imagen', 'player__team__imagen').annotate(
+        # goals = Goal.objects.values('player', 'player__name', 'player__team__name', 'player__imagen', 'player__team__imagen').annotate(
+        #     goals=Count('player'),
+        #     penalties=Sum(Case(When(penalty=True, then=1), default=0, output_field=IntegerField()))
+        # ).order_by('-goals')
+       
+        goals = Goal.objects.filter(
+            schedule__league__slug='minitorneo',
+            player__playerleagueteam__league__slug='minitorneo'
+        ).values('player', 'player__name', 'player__imagen', 'player__playerleagueteam__team__imagen').annotate(
             goals=Count('player'),
             penalties=Sum(Case(When(penalty=True, then=1), default=0, output_field=IntegerField()))
         ).order_by('-goals')
-        
-        # if 'limit' in kwargs:  # limit
-        #     goals = goals[:kwargs['limit']]
+
+        # if 'league_slug' in kwargs:
+        #     schedules = schedules.filter(league__slug=kwargs.get('league_slug'))
 
         context['goals'] = goals
 

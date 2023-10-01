@@ -11,6 +11,7 @@ class ScheduleMenuOptionPageView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
+
         schedules_view = ScheduleView(**kwargs)
         schedules_context = schedules_view.get_context_data(request=self.request, limits=5, show_details=True)
         schedules = render_to_string(schedules_view.template_name, schedules_context)

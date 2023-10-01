@@ -1,0 +1,46 @@
+{% extends './base.html' %}
+
+{% load static %}
+
+{% block title %}
+  My amazing blog
+{% endblock %}
+
+{% block content %}
+  <div class="container">
+    <div class="row mt-2">
+      <div class="col-md">
+        <h1>Campeonato {{ league.name }}</h1>
+      </div>
+    </div>
+    <hr />
+    <div class="row">
+      <div class="col-md">
+        <h3>Equipos</h3>
+        <div class="row row-cols">
+          {% for team in league.teams.all %}
+            <div class="col text-center mt-2">
+              <a href="{% url 'team_details_page' team.id %}">
+                <div class="d-flex flex-column align-items-center">
+                  <img style="height: 48px; width: 48px" src="{% static 'futbol/images/logos/' %}{{ team.imagen|default:'na' }}.png" class="rounded" alt="Logo" />
+                  {{ team.name }}
+                </div>
+              </a>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+    <hr />
+    <div class="row mt-2">
+      <div class="col-md">
+        <h3>Todos los partidos</h3>
+        {{ stats_goals_view }}
+      </div>
+      <div class="col-md">
+        <h3>Calendario</h3>
+        {{ schedules }}
+      </div>
+    </div>
+  </div>
+{% endblock %}

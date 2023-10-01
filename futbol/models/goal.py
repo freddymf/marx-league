@@ -16,4 +16,6 @@ class Goal(models.Model):
     )  # Se utiliza si los peniltis son marcados para la definicion del partido
 
     def __str__(self):
-        return self.min
+        penalty_type = "Penalty" if self.penalty else "Goal"
+        schedule_info = f"{self.schedule.date} - {self.schedule.hc.name} vs {self.schedule.vs.name}"
+        return f"{self.player.name} - {penalty_type} at {self.min} minutes "
