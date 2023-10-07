@@ -20,10 +20,14 @@
     <hr />
     <div class="row">
       <div class="col-md">
+        <h2>Noticias</h2>
+        {{ news_list_html }}
+      </div>
+      <div class="col-md">
         <h1 class="text-center">Ahora estamos en Liga</h1>
         <div class="row row-cols">
           <h3>Equipos</h3>
-          <div class="row row-cols">
+          <div class="row row-cols-4  ">
             {% for team in league.teams.all %}
               <div class="col text-center mt-2">
                 <a href="{% url 'team_details_page' 'liga' team.slug %}">
@@ -36,6 +40,11 @@
             {% endfor %}
           </div>
         </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md">
+        
       </div>
     </div>
     <hr />

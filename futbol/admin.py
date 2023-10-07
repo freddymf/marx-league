@@ -1,4 +1,5 @@
 from django.contrib import admin
+from futbol.models.news import News
 
 from futbol.models.player_league_team import PlayerLeagueTeam
 
@@ -98,5 +99,14 @@ admin.site.register(Schedule, ScheduleAdmin)
 ############################################################
 
 admin.site.register(Goal)
+
+
+class NewsAdmin(admin.ModelAdmin):
+    list_display = [
+        "title",
+        "author",
+    ]
+
+admin.site.register(News, NewsAdmin)
 
 # admin.site.register(Player)

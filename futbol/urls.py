@@ -1,5 +1,6 @@
 from django.urls import path
 from futbol.views.pages.league_page import LeaguePageView
+from futbol.views.pages.news_detail import NewsDetailView
 from futbol.views.pages.regulation_page import RegulationPageView
 
 from futbol.views.pages.schedule_menu_option_page import ScheduleMenuOptionPageView
@@ -20,7 +21,8 @@ urlpatterns = [
     path("schedule/<str:league_slug>/", ScheduleMenuOptionPageView.as_view(), name="schedule_page"),
     path("standings/", StandingsMenuOptionPageView.as_view(), name="standings_page"),
     path("stats/<slug:league_slug>", StatsMenuOptionPageView.as_view(), name="stats_page"),
-    path("team-details/<slug:league_slug>/<slug:team_slug>", TeamDetailsPageView.as_view(), name="team_details_page")
+    path("team-details/<slug:league_slug>/<slug:team_slug>", TeamDetailsPageView.as_view(), name="team_details_page"),
    
+    path('news/<int:pk>/', NewsDetailView.as_view(), name='news_detail'),
  ]
 
