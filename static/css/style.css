@@ -2,7 +2,8 @@
 
   /* Estilos personalizados */
   body {
-    font-size: 14px; /* Tamaño de fuente para el cuerpo */
+    font-size: 14px; /* Tamaño de fuente para el cuerpo*/
+    /* font-family: Open+Sans, sans-serif; */
   }
   
   h1, h2, h3, h4, h5, h6 {

@@ -1,86 +1,50 @@
 {% load static %}
+<div class="card-deck">
+  {% for schedule in schedules %}
+    <div class="card mb-4">
+      <div class="card-body shadow-sm">
+        <div class="d-flex justify-content-between align-items-center">
 
-{{ from }}
-{{ to }}
+          <div class="text-center" >
+            <img style="height: 32px; width: 32px" src="{% static 'futbol/images/logos/' %}{{ schedule.hc.imagen|default:'na' }}.png" class="rounded" alt="Logo" />
+            <br>
+            <a href="{% url 'team_details_page' league.slug schedule.hc.slug %}">{{ schedule.hc }}</a>
+          </div>
+          <div>
+            <div class="fw-bold fs-2 text-center">{{ schedule.hc_goals }}</div>
+          </div>
+          <div class="text-center">
+            <p class="card-text">{{ schedule.date|date:'d/m' }}</p>
+            <p class="card-text">{{ schedule.status }}</p>
+          </div>
+          <div>
+            <div class="fw-bold fs-2 text-center">{{ schedule.vs_goals }}</div>
+          </div>
+          <div class="text-center" >
+            <img style="height: 32px; width: 32px" src="{% static 'futbol/images/logos/' %}{{ schedule.vs.imagen|default:'na' }}.png" class="rounded" alt="Logo" />
+            <br>
+            <a href="{% url 'team_details_page' league.slug schedule.vs.slug %}">{{ schedule.vs }}</a>
+          </div>
 
-<table class="table table-bordered table-condensed">
-  <thead>
-    <tr>
-      <th class="text-center">Etapa</th>
-      <th class="text-center"></th>
-      <th class="text-center"></th>
-      <th class="text-center">Hc</th>
-      <th class="text-center"></th>
-      <th class="text-center">Estado</th>
-      <th class="text-center"></th>
-      <th class="text-center">Vs</th>
-      <th class="text-center"></th>
-
-      {% if show_details %}
-        <th class="text-center">MVP y Goles</th>
-      {% endif %}
-    </tr>
-  </thead>
-  <tbody>
-    {% for schedule in schedules %}
-      <tr>
-        <td class="text-center align-middle">{{ schedule.stages }}</td>
-        <td class="text-center align-middle">{{ schedule.date|date:'d/m' }}</td>
-        <td class="text-center align-middle">
-          <img style="height: 32; width: 32px" src="{% static 'futbol/images/logos/' %}{{ schedule.hc.imagen|default:'na' }}.png" class="rounded" alt="Logo" />
-        </td>
-        <td class="text-center align-middle">
-          <a href="{% url 'team_details_page'  league.slug schedule.hc.slug %}">{{ schedule.hc }}</a>
-        </td>
-        <td class="text-center align-middle">
-          {% if schedule.hc_definition_penalties is not None or schedule.hc_definition_penalties >= 0 %}
-          <span class="fw-bold text-danger small">({{ schedule.hc_definition_penalties }})</span>
-          {% endif %}
-          {% if schedule.status == 'completed' or schedule.status == 'playing' %}
-            <span class="fw-bold fs-2">{{ schedule.hc_goals }}</span>
-          {% endif %}
-        </td>
-        <td class="text-center align-middle">
-          {% if schedule.status == 'completed' %}
-            Final
-          {% elif schedule.status == 'scheduled' %}
-
-          {% elif schedule.status == 'playing' %}
-            En Juego
-          {% elif schedule.status == 'pending' %}
-            Pendiente
-          {% elif schedule.status == 'raining' %}
-            Lloviendo
-          {% endif %}
-        </td>
-        <td class="text-center align-middle">
-          {% if schedule.status == 'completed' or schedule.status == 'playing' %}
-            <span class="fw-bold fs-2">{{ schedule.vs_goals }}</span>
-          {% endif %}
-          {% if schedule.vs_definition_penalties >= 0 %}
-           <span class="fw-bold text-danger small">({{ schedule.vs_definition_penalties }})</span>
-        {% endif %}
-        </td>
-        <td class="text-center align-middle">
-          <a href="{% url 'team_details_page' league.slug  schedule.vs.slug  %}">{{ schedule.vs }}</a>
-        </td>
-        <td class="text-center align-middle">
-          <img style="height: 32; width: 32px" src="{% static 'futbol/images/logos/' %}{{ schedule.vs.imagen|default:'na' }}.png" class="rounded" alt="Logo" />
-        </td>
+        </div>
         {% if show_details %}
-          <td class="text-left">
-            {% if schedule.mvp%}
-            <b>MVP:</b> {{ schedule.mvp.name }} <br />
-            {% endif%}
-            {% if schedule.goal_set.all%}
-            Goles: 
-            {% for goal in schedule.goal_set.all %}
-               {{ goal.player.name }} <br>
-            {% endfor %}
-            {% endif%}
-          </td>
+          <hr />
+          <div class="text-center">
+            {% if schedule.mvp %}
+              <b>MVP:</b> {{ schedule.mvp.name }} <br />
+            {% endif %}
+            {% if schedule.goal_set.all %}
+              <b>Goles:</b>
+              <p>
+                {% for goal in schedule.goal_set.all %}
+                  {{ goal.player.name }} 
+                  {% if not forloop.last %}, {% endif %}
+                {% endfor %}
+              </p>
+            {% endif %}
+          </div>
         {% endif %}
-      </tr>
-    {% endfor %}
-  </tbody>
-</table>
+      </div>
+    </div>
+  {% endfor %}
+</div>
