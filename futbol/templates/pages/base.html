@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -11,6 +12,25 @@
     </title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <link href="{% static 'css/style.css' %}" rel="stylesheet" />
+
+    <style>
+      .floating-button {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background-color: green;
+        color: white;
+        border-radius: 50%;
+        width: 60px;
+        height: 60px;
+        text-align: center;
+        font-size: 24px;
+        line-height: 60px;
+        z-index: 999;
+      }
+    </style>
   </head>
   <body>
     <div class="container">
@@ -23,10 +43,10 @@
               <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                 <a class="nav-link" href="/">Inicio</a>
                 <li class="nav-item">
-                  <a class="nav-link" href="{% url 'league_page' 'liga'%}">Liga</a>
+                  <a class="nav-link" href="{% url 'league_page' 'liga' %}">Liga</a>
                 </li>
-                 <li class="nav-item">
-                  <a class="nav-link" href="{% url 'league_page' 'minitorneo'%}">Minitorneo</a>
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'league_page' 'minitorneo' %}">Minitorneo</a>
                 </li>
                 {% comment %} <li class="nav-item">
                   <a class="nav-link" href="{% url 'standings_page' %}">Posiciones</a>
@@ -55,7 +75,6 @@
       {% comment %} <a href="https://api.whatsapp.com/send?phone=56469646&amp;text=Hola" target="_blank" class="btn btn-success floating-button"><i class="fab fa-whatsapp"></i> Enviar Comentario</a> {% endcomment %}
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
   </body>
 </html>
-
-

@@ -30,7 +30,7 @@
           <img style="height: 32; width: 32px" src="{% static 'futbol/images/logos/' %}{{ schedule.hc.imagen|default:'na' }}.png" class="rounded" alt="Logo" />
         </td>
         <td class="text-center align-middle">
-          <a href="{% url 'team_details_page'  schedule.hc.id %}">{{ schedule.hc }}</a>
+          <a href="{% url 'team_details_page'  league.slug schedule.hc.slug %}">{{ schedule.hc }}</a>
         </td>
         <td class="text-center align-middle">
           {% if schedule.hc_definition_penalties is not None or schedule.hc_definition_penalties >= 0 %}
@@ -62,7 +62,7 @@
         {% endif %}
         </td>
         <td class="text-center align-middle">
-          <a href="{% url 'team_details_page'  schedule.vs.id  %}">{{ schedule.vs }}</a>
+          <a href="{% url 'team_details_page' league.slug  schedule.vs.slug  %}">{{ schedule.vs }}</a>
         </td>
         <td class="text-center align-middle">
           <img style="height: 32; width: 32px" src="{% static 'futbol/images/logos/' %}{{ schedule.vs.imagen|default:'na' }}.png" class="rounded" alt="Logo" />

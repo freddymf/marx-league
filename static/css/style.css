@@ -1,0 +1,62 @@
+/* Tonalidades de azul */
+
+  /* Estilos personalizados */
+  body {
+    font-size: 14px; /* Tamaño de fuente para el cuerpo */
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-size: 18px; /* Tamaño de fuente para los encabezados */
+    color: var(--primary-color); /* Color de los encabezados */
+  }
+  
+  .btn {
+    font-size: 12px; /* Tamaño de fuente para los botones */
+    padding: 5px 10px; /* Espaciado interno para los botones */
+  }
+  
+  .card {
+    font-size: 12px; /* Tamaño de fuente para las tarjetas */
+    border-radius: 5px; /* Bordes redondeados para las tarjetas */
+  }
+  
+  .card-header {
+    background-color: var(--secondary-color); /* Color de fondo del encabezado de las tarjetas */
+    color: #fff; /* Color del texto del encabezado de las tarjetas */
+    font-size: 14px; /* Tamaño de fuente para el encabezado de las tarjetas */
+    padding: 10px; /* Espaciado interno para el encabezado de las tarjetas */
+  }
+
+
+.btn {
+    font-size: 12px; /* Tamaño de fuente para los botones */
+    padding: 5px 10px; /* Espaciado interno para los botones */
+  }
+  
+  .card {
+    font-size: 12px; /* Tamaño de fuente para las tarjetas */
+    border-radius: 5px; /* Bordes redondeados para las tarjetas */
+  }
+  
+  .card-header {
+    background-color: var(--secondary-color); /* Color de fondo del encabezado de las tarjetas */
+    color: #fff; /* Color del texto del encabezado de las tarjetas */
+    font-size: 14px; /* Tamaño de fuente para el encabezado de las tarjetas */
+    padding: 10px; /* Espaciado interno para el encabezado de las tarjetas */
+  }
+  
+  .table {
+    font-size: 12px; /* Tamaño de fuente para las tablas */
+    border-spacing: 0; /* Espaciado entre las celdas de la tabla */
+    border-collapse: collapse; /* Colapso de bordes de la tabla */
+  }
+  
+  .table th,
+  .table td {
+    padding: 5px; /* Espaciado interno para las celdas de la tabla */
+  }
+  
+  .table-sm th,
+  .table-sm td {
+    padding: 1px; /* Espaciado interno reducido para las celdas de la tabla pequeña */
+  }

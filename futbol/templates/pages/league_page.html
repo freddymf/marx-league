@@ -20,7 +20,7 @@
         <div class="row row-cols">
           {% for team in league.teams.all %}
             <div class="col text-center mt-2">
-              <a href="{% url 'team_details_page' team.id %}">
+              <a href="{% url 'team_details_page' league.slug team.slug %}">
                 <div class="d-flex flex-column align-items-center">
                   <img style="height: 48px; width: 48px" src="{% static 'futbol/images/logos/' %}{{ team.imagen|default:'na' }}.png" class="rounded" alt="Logo" />
                   {{ team.name }}
@@ -34,11 +34,17 @@
     <hr />
     <div class="row mt-2">
       <div class="col-md">
-        <h3>Todos los partidos</h3>
+        <div class="d-flex justify-content-between">
+          <h3 class="mr-auto">Líderes en goles</h3>
+          <a class="btn btn-sm btn-secondary m-1" href="{% url 'stats_page' league.slug %}">Ver Todos</a>
+        </div>
         {{ stats_goals_view }}
       </div>
       <div class="col-md">
-        <h3>Calendario</h3>
+        <div class="d-flex justify-content-between">
+          <h3 class="mr-auto">Calendario</h3>
+          <a class="btn btn-sm btn-secondary m-1" href="{% url 'schedule_page' league.slug %}">Ver Todos</a>
+        </div>
         {{ schedules }}
       </div>
     </div>

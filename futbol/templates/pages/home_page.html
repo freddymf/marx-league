@@ -11,53 +11,64 @@
     <div class="row mt-2">
       <div class="col-md d-flex align-items-center justify-content-center">
         <img style="height: 100px; width: 100px" src="/static/futbol/images/logos/ton.png" class="rounded" alt="Logo" />
-        <h3 class="text-center">Tonicones Campeón!!<br><small class="text-muted">MiniTorneo</small></h3>
+        <h3 class="text-center">Tonicones Campeón!!<br /><small class="text-muted">MiniTorneo</small></h3>
       </div>
       <div class="col-md d-flex align-items-center justify-content-center">
         <img style="height: 200px; width: 200px" src="/static/futbol/images/teams/tonicones_campeon.jpeg" class="rounded" alt="Logo" />
       </div>
     </div>
-    <hr>
+    <hr />
     <div class="row">
       <div class="col-md">
-        <h3>Equipos</h3>
+        <h1 class="text-center">Ahora estamos en Liga</h1>
         <div class="row row-cols">
-          {% for team in teams %}
-            <div class="col text-center mt-2">
-              <a href="{% url 'team_details_page' team.id  %}">
-                <div class="d-flex flex-column align-items-center">
-                  <img style="height: 48px; width: 48px" src="{% static 'futbol/images/logos/' %}{{ team.imagen|default:'na' }}.png" class="rounded" alt="Logo" />
-                  {{ team.name }}
-                </div>
-              </a>
-            </div>
-          {% endfor %}
+          <h3>Equipos</h3>
+          <div class="row row-cols">
+            {% for team in league.teams.all %}
+              <div class="col text-center mt-2">
+                <a href="{% url 'team_details_page' 'liga' team.slug %}">
+                  <div class="d-flex flex-column align-items-center">
+                    <img style="height: 48px; width: 48px" src="{% static 'futbol/images/logos/' %}{{ team.imagen|default:'na' }}.png" class="rounded" alt="Logo" />
+                    {{ team.name }}
+                  </div>
+                </a>
+              </div>
+            {% endfor %}
+          </div>
         </div>
       </div>
     </div>
     <hr />
-    <div class="row mt-2">
+    <div class="row justify-content-center align-items-center g-2">
+      <div class="col">
+        <div class="d-grid gap-2 col-6 mx-auto">
+          <a class="btn btn-outline-secondary" type="button"  href="{% url 'league_page' 'liga' %}"><b>Liga</b> ver más...</a>
+          <a class="btn btn-outline-secondary" type="button"  href="{% url 'league_page' 'minitorneo' %}"><b>Minitorneo</b> ver más...</a>
+        </div>
+      </div>
+    </div>
+    {% comment %} <div class="row mt-2">
       <div class="col-md">
         <h3>Próximos partidos</h3>
         {{ schedules }}
       </div>
       <div class="col-md"></div>
     </div>
-    <hr />
+    <hr /> {% endcomment %}
     <footer class="bg-light text-black">
       <div class="container py-4">
         <div class="row">
-          <div class="col-md-4">
-            <h5>Información de contacto</h5>
-            {% comment %} <p>Email: example@example.com</p> {% endcomment %}
-            <p> <i class="fa fa-whatsapp" aria-hidden="true"></i>
-              <i class="fa fa-whatsapp" aria-hidden="true"></i>
-              +53 56469646
-            </p>
-           
-            <p>Dirección: Reparto Armando Mestre, Matanzas</p>
-            <p>Google Maps: <a href="https://maps.app.goo.gl/WGDkYqA9VvewT6i7A">https://maps.app.goo.gl/WGDkYqA9VvewT6i7A</a> </p>
-            
+          <div class="col">
+            <a href="https://api.whatsapp.com/send?phone=56469646" target="_blank">
+              <div class="floating-button">
+                <i class="fab fa-whatsapp"></i>
+              </div>
+            </a>
+            {% comment %} <p>Dirección: Reparto Armando Mestre, Matanzas</p> {% endcomment %}
+            {% comment %} <p>
+              Google Maps: <a href="https://maps.app.goo.gl/WGDkYqA9VvewT6i7A">https://maps.app.goo.gl/WGDkYqA9VvewT6i7A</a>
+            </p> {% endcomment %}
+            {% comment %} <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d3167.653042740333!2d-81.60809451629056!3d23.033248944288605!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1ses-419!2scu!4v1696506101556!5m2!1ses-419!2scu" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe> {% endcomment %}
           </div>
           <div class="col-md-4">
             <!-- Additional footer content or links can be added here -->

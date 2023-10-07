@@ -1,14 +1,15 @@
 from datetime import date
 from django.views.generic import TemplateView
 from django.db.models import Q
+from futbol.models.league import League
 from futbol.models.schedule import Schedule
+from futbol.models.team import Team
 
 class ScheduleView(TemplateView):
     template_name = "views/schedule_view.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-
 
         schedules = Schedule.objects.all()
         if '_from' in kwargs and '_to' in kwargs:
@@ -23,18 +24,20 @@ class ScheduleView(TemplateView):
             schedules = Schedule.objects.filter( date__lte=_to)
 
             
-        if 'team_filter' in kwargs:
-            team = kwargs['team_filter']
-            context['team'] = team
+        if 'team_slug' in kwargs:
+            team = Team.objects.get(slug=kwargs['team_slug'])
             schedules = schedules.filter(Q(vs=team) | Q(hc=team))
+            context['team'] = team
 
         if 'league_slug' in kwargs:
+            league = League.objects.get(slug=kwargs.get('league_slug'))
             schedules = schedules.filter(league__slug=kwargs.get('league_slug'))
+            context['league'] = league
 
         schedules = schedules.order_by('-date')
 
         if 'limit' in kwargs:  # limit
-            schedules = schedules[:kwargs['limit']]
+            schedules = schedules[:kwargs.get('limit')]
 
 
         if 'details' in kwargs:

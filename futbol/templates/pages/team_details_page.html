@@ -10,33 +10,53 @@
   <div class="container">
     <div class="row">
       <div class="col-auto">
-        <img style="height: 48; width: 48px" src="{% static 'futbol/images/logos/' %}{{ team.imagen|default:"na" }}.png" class="rounded" alt="Logo">
+        <img style="height: 48; width: 48px" src="{% static 'futbol/images/logos/' %}{{ team.imagen|default:'na' }}.png" class="rounded" alt="Logo" />
       </div>
       <div class="col">
-        <h3>{{ team.name }}</h3>
+        <h1>{{ team.name }}</h1>
+        <h1>en {{ league.name }}</h1>
       </div>
     </div>
     <hr />
+    <h5 class="text-center">Jugadores</h5>
     <div class="row">
-      <div class="col">
-        <h5 class="text-center">Jugadores</h5>
-        <div class="row row-cols-3">
-          {% for player in players %}
-            <div class="col-md text-center mt-2">
-              <div class="d-flex flex-column align-items-center">
-                <img style="width: 48px; height: 48;" src="{% static '/futbol/images/players/' %}{{ player.imagen|default:'na' }}.png" class="rounded" alt="Logo" /> <br />
-                {{ player.name }}
-              </div>
-            </div>
-          {% endfor %}
+        <div class="col-md">
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th class="text-center align-middle"  colspan="2"><h2>{{ league.name }}</h2></th>
+              </tr>
+              <tr>
+                <th scope="col"></th>
+                <th scope="col">Name</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for player_league_team in players_leagues_teams %}
+                  <tr>
+                    <td class="text-center align-middle">
+                      <img style="height: 24; width: 24px" src="{% static 'futbol/images/players/' %}{{ player_league_team.player.imagen|default:'na' }}.png" class="rounded" alt="Logo" />
+                    </td>
+                    <td class="align-middle">{{ player_league_team.player.name }}</td>
+                  </tr>
+              {% endfor %}
+            </tbody>
+          </table>
         </div>
-      </div>
     </div>
     <hr />
-    <div class="row">
-      <div class="col">
-        <h5 class="text-center">Resultados</h5>
-        <div class="col">{{ schedules }}</div>
+    <div class="row mt-2">
+      <div class="col-md">
+        <div class="d-flex justify-content-between">
+          <h3 class="mr-auto">Goleadores</h3>
+        </div>
+        {{ stats_goals_view }}
+      </div>
+      <div class="col-md">
+        <div class="d-flex justify-content-between">
+          <h3 class="mr-auto">Resultados</h3>
+        </div>
+        {{ schedules }}
       </div>
     </div>
   </div>

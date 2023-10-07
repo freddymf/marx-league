@@ -17,10 +17,10 @@ urlpatterns = [
 
     path("teams/<slug:league_slug>/", TeamsPageView.as_view(), name="teams_page"),
 
-    path("schedule/<str:league>/<str:schedule>/", ScheduleMenuOptionPageView.as_view(), name="schedule_page"),
+    path("schedule/<str:league_slug>/", ScheduleMenuOptionPageView.as_view(), name="schedule_page"),
     path("standings/", StandingsMenuOptionPageView.as_view(), name="standings_page"),
-    path("stats/", StatsMenuOptionPageView.as_view(), name="stats_page"),
-    path("team-details/<int:id>", TeamDetailsPageView.as_view(), name="team_details_page")
+    path("stats/<slug:league_slug>", StatsMenuOptionPageView.as_view(), name="stats_page"),
+    path("team-details/<slug:league_slug>/<slug:team_slug>", TeamDetailsPageView.as_view(), name="team_details_page")
    
  ]
 
