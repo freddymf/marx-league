@@ -4,28 +4,34 @@
     <div class="card mb-4">
       <div class="card-body shadow-sm">
         <div class="d-flex justify-content-between align-items-center">
-
-          <div class="text-center" >
+          <div class="text-center flex-fill">
             <img style="height: 32px; width: 32px" src="{% static 'futbol/images/logos/' %}{{ schedule.hc.imagen|default:'na' }}.png" class="rounded" alt="Logo" />
-            <br>
+            <br />
             <a href="{% url 'team_details_page' league.slug schedule.hc.slug %}">{{ schedule.hc }}</a>
           </div>
-          <div>
-            <div class="fw-bold fs-2 text-center">{{ schedule.hc_goals }}</div>
+          <div class="text-center flex-fill">
+            <div class="fw-bold fs-2 text-center">
+              {% if schedule.hc_goals is not None  %}
+                {{ schedule.hc_goals }}
+              {% endif %}
+            </div>
           </div>
-          <div class="text-center">
+          <div class="text-center flex-fill">
             <p class="card-text">{{ schedule.date|date:'d/m' }}</p>
             <p class="card-text">{{ schedule.status }}</p>
           </div>
-          <div>
-            <div class="fw-bold fs-2 text-center">{{ schedule.vs_goals }}</div>
+          <div class="flex-fill">
+            <div class="fw-bold fs-2 text-center">
+              {% if schedule.vs_goals is not None  %}
+                {{ schedule.vs_goals }}
+              {% endif %}
+            </div>
           </div>
-          <div class="text-center" >
+          <div class="text-center flex-fill">
             <img style="height: 32px; width: 32px" src="{% static 'futbol/images/logos/' %}{{ schedule.vs.imagen|default:'na' }}.png" class="rounded" alt="Logo" />
-            <br>
+            <br />
             <a href="{% url 'team_details_page' league.slug schedule.vs.slug %}">{{ schedule.vs }}</a>
           </div>
-
         </div>
         {% if show_details %}
           <hr />
@@ -37,7 +43,7 @@
               <b>Goles:</b>
               <p>
                 {% for goal in schedule.goal_set.all %}
-                  {{ goal.player.name }} 
+                  {{ goal.player.name }}
                   {% if not forloop.last %}, {% endif %}
                 {% endfor %}
               </p>
