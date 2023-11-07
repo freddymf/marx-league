@@ -35,6 +35,12 @@
     <div class="row mt-2">
       <div class="col-md">
         <div class="d-flex justify-content-between">
+          <h3 class="mr-auto">Posiciones</h3>
+          <a class="btn btn-sm btn-secondary m-1" href="{% url 'standing_page' league.slug %}">Ver Todos</a>
+        </div>
+        {{ standing_view }}
+        <br>
+        <div class="d-flex justify-content-between">
           <h3 class="mr-auto">Líderes en goles</h3>
           <a class="btn btn-sm btn-secondary m-1" href="{% url 'stats_page' league.slug %}">Ver Todos</a>
         </div>

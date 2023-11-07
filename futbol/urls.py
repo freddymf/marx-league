@@ -19,7 +19,7 @@ urlpatterns = [
     path("teams/<slug:league_slug>/", TeamsPageView.as_view(), name="teams_page"),
 
     path("schedule/<str:league_slug>/", ScheduleMenuOptionPageView.as_view(), name="schedule_page"),
-    path("standings/", StandingsMenuOptionPageView.as_view(), name="standings_page"),
+    path("standing/<slug:league_slug>", StandingsMenuOptionPageView.as_view(), name="standing_page"),
     path("stats/<slug:league_slug>", StatsMenuOptionPageView.as_view(), name="stats_page"),
     path("team-details/<slug:league_slug>/<slug:team_slug>", TeamDetailsPageView.as_view(), name="team_details_page"),
    

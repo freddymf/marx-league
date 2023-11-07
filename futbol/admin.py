@@ -2,6 +2,7 @@ from django.contrib import admin
 from futbol.models.news import News
 
 from futbol.models.player_league_team import PlayerLeagueTeam
+from futbol.models.standing import Standing 
 
 from .models.goal import Goal
 
@@ -91,6 +92,25 @@ class ScheduleAdmin(admin.ModelAdmin):
     ]
     inlines = [GoalInline]
 
+    def save_model(self, request, obj, form, change):
+        
+        # Save the original Schedule object
+        original_schedule = Schedule.objects.get(pk=obj.pk)
+
+        # Call the parent save_model method to save the updated Schedule
+        super().save_model(request, obj, form, change)
+
+        # Check if any field in the Schedule model has changed
+        # if original_schedule != obj:
+            # Perform operations on other models (e.g., Stats)
+            # Here, we'll update the Stats model when Schedule is updated
+        Standing.update_stat_form_league(request, obj, form, change)
+            
+            
+        # Update de Stat table
+        #stats = Stat.objects.first()
+            # stats.updated = True
+            # stats.save()
 
 admin.site.register(Schedule, ScheduleAdmin)
 
@@ -109,4 +129,18 @@ class NewsAdmin(admin.ModelAdmin):
 
 admin.site.register(News, NewsAdmin)
 
-# admin.site.register(Player)
+
+class StandingAdmin(admin.ModelAdmin):
+    list_display = [
+        "league",
+        "team",
+        "pj",
+        "pg",
+        "pp",
+        "pe",
+        "pts",
+    ]
+
+
+admin.site.register(Standing, StandingAdmin)
+

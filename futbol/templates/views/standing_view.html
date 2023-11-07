@@ -1,0 +1,30 @@
+{% load static %}
+
+<table class="table table-bordered table-condensed shadow-sm">
+  <thead>
+    <tr>
+      <th class="text-center"></th>
+      <th class="text-center">Equipo</th>
+      <th class="text-center">PJ</th>
+      <th class="text-center">PG</th>
+      <th class="text-center">PE</th>
+      <th class="text-center">PP</th>
+      <th class="text-center">Ptos</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for standing in standings %}
+      <tr>
+        <td class="text-center align-middle">
+          <img style="height: 24; width: 24px" src="{% static 'futbol/images/logos/' %}{{ standing.team.imagen|default:'na' }}.png" class="rounded" alt="Logo" />
+        </td>
+        <td class="text-center align-middle">{{ standing.team }}</td>
+        <td class="text-center align-middle">{{ standing.pj }}</td>
+        <td class="text-center align-middle">{{ standing.pg }}</td>
+        <td class="text-center align-middle">{{ standing.pe }}</td>
+        <td class="text-center align-middle">{{ standing.pp }}</td>
+        <td class="text-center align-middle">{{ standing.pts }}</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
