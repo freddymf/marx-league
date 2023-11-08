@@ -37,7 +37,7 @@ class StandingView(TemplateView):
             # schedules = schedules.filter(league__slug=kwargs.get('league_slug'))
             context['league'] = league
 
-        standings = standings.order_by('-pts')
+        standings = standings.order_by('-pts', '-gdif')
 
         if 'limit' in kwargs:  # limit
             standings = standings[:kwargs.get('limit')]

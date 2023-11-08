@@ -121,12 +121,13 @@ class Standing(models.Model):
                 .count()
             )
 
-#     gf = Schedule.objects.filter(
-#     Q(vs=team) | Q(hc=team),
-#     league=league,
-#     stages="regular"
-# ).aggregate(goals_sum=Sum("vs_goals") + Sum("hc_goals")).get("goals_sum", 0) or 0
+            gf = Schedule.objects.filter(vs=team, league=league, stages="regular").aggregate(Sum('vs_goals'))['vs_goals__sum'] or 0
+            gf = gf + (Schedule.objects.filter(hc=team, league=league, stages="regular").aggregate(Sum('hc_goals'))['hc_goals__sum'] or 0)
+
+            gc = Schedule.objects.filter(vs=team, league=league, stages="regular").aggregate(Sum('hc_goals'))['hc_goals__sum'] or 0
+            gc = gc + (Schedule.objects.filter(hc=team, league=league, stages="regular").aggregate(Sum('vs_goals'))['vs_goals__sum'] or 0)
             
+            gdif = gf - gc
 
             # Actualizar los campos pts, pg y pp en el objeto Stat correspondiente al equipo
             try:
@@ -139,6 +140,8 @@ class Standing(models.Model):
             stat_obj.pp = pp
             stat_obj.pe = pe
             stat_obj.pts = (pg * 3) + pe
-            # 
-            # stat_obj.gf = gf
+            
+            stat_obj.gf = gf
+            stat_obj.gc = gc
+            stat_obj.gdif = gdif
             stat_obj.save()

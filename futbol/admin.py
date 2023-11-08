@@ -84,8 +84,8 @@ class ScheduleAdmin(admin.ModelAdmin):
         "status",
         "vs_goals",
         "vs",
-        "hc_points",
-        "vs_points",
+        # "hc_points",
+        # "vs_points",
         "hc_definition_penalties",
         "vs_definition_penalties",
         "mvp",
@@ -93,18 +93,36 @@ class ScheduleAdmin(admin.ModelAdmin):
     inlines = [GoalInline]
 
     def save_model(self, request, obj, form, change):
-        
-        # Save the original Schedule object
-        original_schedule = Schedule.objects.get(pk=obj.pk)
-
-        # Call the parent save_model method to save the updated Schedule
         super().save_model(request, obj, form, change)
+           
+        try:
+            # Save the original Schedule object
+            original_schedule = Schedule.objects.get(pk=obj.pk)
 
-        # Check if any field in the Schedule model has changed
-        # if original_schedule != obj:
-            # Perform operations on other models (e.g., Stats)
-            # Here, we'll update the Stats model when Schedule is updated
-        Standing.update_stat_form_league(request, obj, form, change)
+            # Call the parent save_model method to save the updated Schedule
+         
+
+            # Check if any field in the Schedule model has changed
+            # if original_schedule != obj:
+                # Perform operations on other models (e.g., Stats)
+                # Here, we'll update the Stats model when Schedule is updated
+            Standing.update_stat_form_league(request, obj, form, change)
+            
+        except Schedule.DoesNotExist:
+            original_schedule = None
+            
+    def delete_model(self, request, obj):
+        # Perform any necessary actions before deleting the model
+        # For example, you can log the deletion or perform related operations
+
+        # Call the parent class method to delete the model
+        super().delete_model(request, obj)
+        # Perform any additional actions after deleting the model
+        # For example, you can update related records or send notifications
+        Standing.update_stat_form_league(request, obj, form=None, change=None)
+
+        
+
             
             
         # Update de Stat table
