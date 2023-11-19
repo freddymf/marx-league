@@ -24,7 +24,7 @@ class TeamDetailsPageView(TemplateView):
         league = League.objects.get(slug=kwargs.get("league_slug"))
 
         players_leagues_teams = PlayerLeagueTeam.objects.filter(
-            team=team, league=league
+            team=team, league=league, active=True
         )
 
         schedules_view = ScheduleView(**kwargs)

@@ -9,6 +9,8 @@ class PlayerLeagueTeam(models.Model):
     player = models.ForeignKey(Player, on_delete=models.CASCADE)
     league = models.ForeignKey(League, on_delete=models.CASCADE)
     team = models.ForeignKey(Team, on_delete=models.CASCADE)
+    
+    active = models.BooleanField(default=True)
 
     def __str__(self):
         return f"{self.player.name} - {self.league.name} - {self.team.name}"

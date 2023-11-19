@@ -12,6 +12,6 @@ class Player(models.Model):
 
     imagen = models.CharField(max_length=100, null=True, blank=True)
     alias = models.CharField(max_length=50, null=True, blank=True)
-
+    
     def __str__(self):
         return self.name
