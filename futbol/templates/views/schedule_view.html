@@ -11,22 +11,33 @@
           </div>
           <div class="text-center flex-fill">
             <div class="fw-bold fs-2 text-center">
-              {% if schedule.hc_goals is not None  %}
+              {% if schedule.hc_goals is not None %}
                 {{ schedule.hc_goals }}
+              {% endif %}
+              {% if schedule.hc_definition_penalties > 0 %}
+                <div class="fs-5 text-secondary text-center">
+                  ({{ schedule.hc_definition_penalties }})
+                </div>
               {% endif %}
             </div>
           </div>
           <div class="text-center flex-fill">
-            <p class="card-text">{{ schedule.date|date:'d/m' }}</p>
+            <p class="card-text">{{ schedule.date|date:"d/m" }}</p>
             <p class="card-text">{{ schedule.status }}</p>
           </div>
           <div class="flex-fill">
             <div class="fw-bold fs-2 text-center">
-              {% if schedule.vs_goals is not None  %}
+              {% if schedule.vs_goals is not None %}
                 {{ schedule.vs_goals }}
+              {% endif %}
+              {% if schedule.vs_definition_penalties > 0 %}
+                <div class="fs-5 text-secondary text-center">
+                  ({{ schedule.vs_definition_penalties }})
+                </div>
               {% endif %}
             </div>
           </div>
+         
           <div class="text-center flex-fill">
             <img style="height: 32px; width: 32px" src="{% static 'futbol/images/logos/' %}{{ schedule.vs.imagen|default:'na' }}.png" class="rounded" alt="Logo" />
             <br />
